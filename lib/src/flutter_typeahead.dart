@@ -784,9 +784,9 @@ class _TypeAheadFieldState<T> extends State<TypeAheadField<T>>
       if (_effectiveFocusNode!.hasFocus) {
         this._suggestionsBox!.open();
       } else {
-          if (widget.hideSuggestionsOnKeyboardHide){
-            this._suggestionsBox!.close();
-          }
+        if (widget.hideSuggestionsOnKeyboardHide) {
+          this._suggestionsBox!.close();
+        }
       }
     };
 
@@ -860,6 +860,7 @@ class _TypeAheadFieldState<T> extends State<TypeAheadField<T>>
         getImmediateSuggestions: widget.getImmediateSuggestions,
         onSuggestionSelected: (T selection) {
           if (!widget.keepSuggestionsOnSuggestionSelected) {
+            if (selection != null) widget.onSuggestionSelected(selection);
             this._effectiveFocusNode!.unfocus();
             this._suggestionsBox!.close();
           }
@@ -935,7 +936,8 @@ class _TypeAheadFieldState<T> extends State<TypeAheadField<T>>
         textAlignVertical: widget.textFieldConfiguration.textAlignVertical,
         minLines: widget.textFieldConfiguration.minLines,
         maxLength: widget.textFieldConfiguration.maxLength,
-        maxLengthEnforcement: widget.textFieldConfiguration.maxLengthEnforcement,
+        maxLengthEnforcement:
+            widget.textFieldConfiguration.maxLengthEnforcement,
         obscureText: widget.textFieldConfiguration.obscureText,
         onChanged: widget.textFieldConfiguration.onChanged,
         onSubmitted: widget.textFieldConfiguration.onSubmitted,
